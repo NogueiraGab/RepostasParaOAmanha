@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	{
 		this.gameObject.AddComponent<CameraControler> ();
 		this.gameObject.AddComponent<DoorController> ();
+		this.gameObject.AddComponent<Inventory> ();
 		this.gameObject.name = "Player";
 	}
 

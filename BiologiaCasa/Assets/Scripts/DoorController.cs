@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum SCALE { GROWUP = 1,  DECREASE = -1 }
+
 public class DoorController : MonoBehaviour 
 {
 	private GameObject camera;
 	private Vector3 finalWorldPos;
 	private Vector3 startWorldPos;
 	private Vector3 WorldPos;
+	private GameObject pair;
 
 	private int currentStageY;
 	private int speedCamera = 10;
@@ -41,6 +44,7 @@ public class DoorController : MonoBehaviour
 			this.cameraMoving = false;
 			this.ResetWorldPos();
 			this.currentStageY += (int)orientation;
+			print (this.currentStageY);
 			//	StopCoroutine(this.MoveNextStage(direction));
 		}
 	}
@@ -60,6 +64,26 @@ public class DoorController : MonoBehaviour
 		this.cameraMoving = true;
 	}
 
+	private IEnumerator MoveNextDoor(GameObject pair, SCALE scale)
+	{
+		yield return new WaitForFixedUpdate ();
+		print ((int)scale);
+		this.transform.localScale += new Vector3 (0.01f * (int)scale, 0.01f * (int)scale, 0.01f * (int)scale);
+		if (this.transform.localScale.x < 0.5f && scale == SCALE.DECREASE) 
+		{
+			this.transform.position = pair.transform.position;
+			this.StartCoroutine(MoveNextDoor(pair,SCALE.GROWUP));
+		}
+		else if(scale == SCALE.GROWUP && this.transform.localScale.x >= 1)
+		{
+			//bher
+		}
+		else
+		{
+			StartCoroutine(MoveNextDoor(pair, scale));
+		}
+	}
+
 
 
 	void OnTriggerStay2D(Collider2D c)
@@ -69,6 +93,7 @@ public class DoorController : MonoBehaviour
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
 				StartCoroutine(MoveNextStage(c.GetComponent<Door>().orientation));
+				StartCoroutine(MoveNextDoor(c.gameObject.GetComponent<Door>().pair, SCALE.DECREASE));
 			}
 		}
 
