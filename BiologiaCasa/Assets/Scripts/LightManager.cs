@@ -9,7 +9,7 @@ public class LightManager : MonoBehaviour
 	private Light currentLight;
 	private int currentStage;
 	[SerializeField]
-	private float maxIntensity = 1.2f;
+	private float maxIntensity = 0.9f;
 	private float speedIntensity = 0.05f;
 	private bool lightTurningOn;
 
@@ -84,7 +84,9 @@ public class LightManager : MonoBehaviour
 				}
 			else
 			{
+				if(this.lightsIntensity.Count-1 > i)
 				this.lightsIntensity[i] = this.currentLight.intensity;
+
 				this.allLights[i].GetComponent<Light>().intensity = 0;
 			}
 		}

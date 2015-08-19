@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-	float speed = 10;
+	float speed = 2;
 
 	private CameraControler cameraControler;
 	private DoorController doorController;
 	private LightManager lightManager;
 	private Inventory inventory;
+	private PlayerController playerController;
 
 	void Start()
 	{
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
 		this.doorController = this.gameObject.AddComponent<DoorController> ();
 		this.inventory = this.gameObject.AddComponent<Inventory> ();
 		this.lightManager = this.gameObject.AddComponent<LightManager> ();
+		this.playerController = this.gameObject.AddComponent<PlayerController> ();
 
 		this.cameraControler.lightManager = this.lightManager;
 		this.gameObject.name = "Player";
