@@ -13,4 +13,6 @@ public class GameManager : MonoBehaviour
 		GameObject playerObj = (GameObject)Instantiate (this.prefabPlayer);
 		playerObj.AddComponent<Player>();
 	}
+
+
 }

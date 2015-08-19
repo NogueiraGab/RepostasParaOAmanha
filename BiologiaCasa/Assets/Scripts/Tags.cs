@@ -5,4 +5,5 @@ public class Tags
 {
 	public  const string door = "Door";
 	public  const string anObject = "Object";
+	public  const string anSwitch = "Switch";
 }

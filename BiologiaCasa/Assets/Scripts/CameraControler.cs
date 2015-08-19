@@ -14,6 +14,7 @@ public class CameraControler : MonoBehaviour
 	private int currentStage = 0;
 	private float totalDistance;
 	private bool cameraMoving;
+	public LightManager lightManager;
 
 	[SerializeField]
 	int speedCamera = 10;
@@ -47,12 +48,16 @@ public class CameraControler : MonoBehaviour
 		if (currentDistance > this.totalDistance/100) 
 		{
 			StartCoroutine (MoveNextStage (direction));
+
 		} 
 		else
 		{
 			this.cameraMoving = false;
 			this.ResetWorldPos();
 			this.currentStage += (int)direction;
+			
+			this.lightManager.SetCurrentStage(this.currentStage);
+
 		//	StopCoroutine(this.MoveNextStage(direction));
 		}
 	}

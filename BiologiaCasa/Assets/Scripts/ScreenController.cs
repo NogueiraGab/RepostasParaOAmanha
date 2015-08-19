@@ -22,4 +22,5 @@ public class ScreenController : MonoBehaviour
 		this.WorldPos = new Vector3 (this.finalWorldPos.x - this.startWorldPos.x, this.finalWorldPos.y - this.startWorldPos.y, 0);
 
 	}
+
 }
